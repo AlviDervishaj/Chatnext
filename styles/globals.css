@@ -28,9 +28,8 @@
   /* Authenticate Component */
   .authenticate{
     @apply py-2 px-3 rounded-xl rounded-tr-md relative text-center text-base tracking-wide font-sans;
-    @apply bg-authButton-light text-slate-200;
+    @apply bg-authButton-light text-slate-100;
     @apply dark:bg-authButton-dark dark:text-slate-100;
-    @apply bg-chat-dark;
   }
 
   /* Loading Helper Text */

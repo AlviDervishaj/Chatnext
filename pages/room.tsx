@@ -44,7 +44,7 @@ const Room: NextPage = () => {
           content="Chatnext a simple and reliable communication tool."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://localhost:3000/" />
+        <meta property="og:url" content="https://chatnext.vercel.app/" />
         <meta property="og:title" content="Chatnext" />
         <meta
           property="og:description"
@@ -55,7 +55,7 @@ const Room: NextPage = () => {
           content="https://portfolio-alvi.vercel.app/static/images/high.png"
         />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="http://localhost:3000/" />
+        <meta property="twitter:url" content="https://chatnext.vercel.app/" />
         <meta property="twitter:creator" content="@alvi_d1" />
         <meta property="twitter:title" content="Chatnext" />
         <meta
