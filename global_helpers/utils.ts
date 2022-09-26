@@ -1,4 +1,13 @@
-export const getReadableTime: Function = (getMilliseconds: boolean): string => {
+export async function copyToClipboard(content: string): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(content);
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+}
+
+
+export const getReadableTime = (getMilliseconds: boolean): string => {
   // crate new date instance
   let date_instance: string = new Date().toISOString();
   const [date, time]: string[] = date_instance.split("T");
@@ -10,7 +19,7 @@ export const getReadableTime: Function = (getMilliseconds: boolean): string => {
   return returned_time;
 }
 
-export const getCurrentDate: Function = (): string => {
+export const getCurrentDate = (): string => {
   // create new date instance
   let date_instace: string = new Date().toISOString();
   const [date, time]: string[] = date_instace.split("T");

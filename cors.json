@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["https://chatnext.vercel.app/", "http://localhost:3000/"],
+      "method": ["GET", "POST"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+]

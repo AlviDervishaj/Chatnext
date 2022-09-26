@@ -1,13 +1,14 @@
 // Next & React
 import { useState, useEffect } from "react";
 import type { AppProps } from 'next/app'
+import { NextRouter, useRouter } from "next/router";
 
 // Styling
 import '../styles/globals.css'
 
 // Firebase
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { Auth, getAuth, onAuthStateChanged, Unsubscribe, User } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
@@ -15,11 +16,15 @@ import { getFirestore } from "firebase/firestore";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
+// Helpers
+import { checkRoute } from "../global_helpers";
+
 // Config fontawesome
 config.autoAddCss = false
 
 function MyApp({ Component, pageProps }: AppProps) {
 
+  const router: NextRouter = useRouter();
   const [_, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -44,9 +49,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   const app = initializeApp(firebaseConfig);
-  getAuth(app);
+  const auth: Auth = getAuth(app);
   getStorage(app);
   getFirestore(app);
+
+  useEffect(() => {
+    const unsub: Unsubscribe = onAuthStateChanged(auth, (_user: User | null) => {
+      const pathname: string = router.pathname;
+      const isRouteProtected: boolean = checkRoute(pathname);
+      if (isRouteProtected && _user === null) return router.replace("/");
+      return;
+    });
+    return () => unsub();
+  }, [router, auth]);
 
   return <Component {...pageProps} />
 }
