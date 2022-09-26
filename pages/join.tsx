@@ -67,7 +67,7 @@ const Join: NextPage = () => {
       setUser(_user);
     });
     return () => unsubscribe();
-  }, [auth])
+  }, [auth, router])
 
   return (
     <>

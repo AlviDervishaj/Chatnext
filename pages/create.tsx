@@ -58,7 +58,7 @@ const Create: NextPage = () => {
       setUser(_user);
     });
     return () => unsubscribe();
-  }, [auth])
+  }, [auth, router])
 
   const createRoom = async (event: TouchEvent | MouseEvent) => {
     event.preventDefault();

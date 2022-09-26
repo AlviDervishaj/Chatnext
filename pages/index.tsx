@@ -31,7 +31,7 @@ const Home: NextPage = () => {
       }
     );
     return () => unsubscribe();
-  }, [auth]);
+  }, [router, auth]);
   return (
     <>
       <Head>

@@ -14,6 +14,7 @@ const Room: NextPage = () => {
   const [code, setCode] = useState<string>('');
   const router: NextRouter = useRouter();
   const firestore: Firestore = getFirestore();
+  const coll: CollectionReference = collection(firestore, "rooms");
 
   // get room code on url
   useEffect(() => {
@@ -23,13 +24,12 @@ const Room: NextPage = () => {
       setCode(_code);
       // check room code
       if (_code.length !== 4 || isNaN(+_code)) return router.push("/create");
-      const coll: CollectionReference = collection(firestore, "rooms");
       const q: Query = query(coll, where("code", "==", _code));
       const querySnapshot: QuerySnapshot = await getDocs(q);
       if (querySnapshot.empty) return await router.push("/join");
     };
     checkCode()
-  }, [router])
+  }, [router, coll])
 
   return (
     <>
