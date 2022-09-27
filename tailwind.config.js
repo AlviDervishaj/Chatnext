@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         "chat": {
-          "light": "#e0fbfc",
+          "light": "#3a506b",
           "dark": "#0f172a",
           "helperText": "#edf6f9",
           "message": {
@@ -17,9 +17,21 @@ module.exports = {
             "light": "#98c1d9",
           }
         },
+        "toggleTheme": {
+          "light": "#03c4fd",
+           "dark": "#7dd3fc", 
+        },
         "authButton": {
           "light": "#3da5d9",
           "dark": "#247ba0"
+        },
+        "signOut": {
+          "light": "#0aefff",
+          "dark": "#e2e8f0",
+        },
+        "error": {
+          "light": "#ed0101",
+          "dark": "#d90429",
         },
         "loading": {
           "light": "#4361ee",

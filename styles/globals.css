@@ -8,7 +8,7 @@
 /* Base styles */
 @layer base {
   html, body {
-    @apply p-0 m-0 w-screen h-screen bg-chat-dark;
+    @apply p-0 m-0 w-full h-full bg-chat-light dark:bg-chat-dark;
   }
   input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -54,7 +54,7 @@
 
   /* Chat Room */
   .chat-room {
-    @apply w-full h-full px-2 relative md:bg-chat-dark;
+    @apply w-full h-full px-2 relative ;
   }
 
   .chat-room-background {
@@ -83,8 +83,17 @@
     @apply border-b border-b-slate-100/80;
     @apply text-center;
     @apply bg-transparent outline-none text-slate-200; 
-    @apply placeholder:text-sky-300 placeholder:font-normal placeholder:tracking-wide;
+    @apply placeholder:text-sky-400 dark:placeholder:text-signOut-dark/70 placeholder:font-normal placeholder:tracking-wide;
+    @apply focus:placeholder:text-transparent;
     @apply focus:border-sky-500;
+  }
+
+  /* Join and Create room buttons */
+  .enter-room {
+    @apply text-slate-200 bg-blue-500; 
+    @apply px-2 py-1;
+    @apply border rounded-full border-sky-500;
+    @apply disabled:border-sky-500/20 disabled:bg-blue-500/20 disabled:text-slate-200/40  disabled:cursor-not-allowed;
   }
 }
 

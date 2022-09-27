@@ -108,12 +108,12 @@ const Join: NextPage = () => {
       <main className="w-full h-full overflow-hidden relative mx-auto px-4">
         <Navigation />
         <form className="h-full flex flex-col items-center content-center justify-center gap-4">
-          <input type={"text"} pattern={"^[0-9]{4}$"} placeholder="Join a room to talk to your friends !" className="room-code" maxLength={4} max={9999}
+          <input type={"text"} pattern={"^[0-9]{4}$"} placeholder="Join your friends and chat" className="room-code" maxLength={4} max={9999}
             min={0o0} value={roomCode} onChange={(event: any) => handleRoomCode(event.target.value)} />
-          <p className="text-red-500 text-center mx-auto pt-4">{error}</p>
+          <p className="dark:text-error-dark text-error-light text-center mx-auto pt-4">{error}</p>
           <button
             onClick={(event: TouchEvent | MouseEvent) => joinRoom(event)}
-            className="border disabled:bg-blue-500/20 disabled:text-slate-200/40 disabled:border-sky-500/20 disabled:cursor-not-allowed border-sky-500 text-slate-200 bg-blue-500 px-2 py-1 rounded-full"
+            className="enter-room"
             disabled={!allowSubmit}
           >Join Room</button>
           <section className="relative w-fit h-fit pt-20">

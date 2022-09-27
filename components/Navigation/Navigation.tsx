@@ -25,8 +25,8 @@ export const Navigation: NextComponentType = () => {
       <nav className="flex flex-row items-center content-center justify-between" id="navigation">
         <ToggleTheme />
         <button className="py-2 px-3 flex flex-row gap-2 justify-center items-center content-center" onClick={() => handleLogOut()}>
-          <FontAwesomeIcon icon={faArrowRightFromBracket} className={"dark:text-slate-200 text-slate-800"} />
-          <p className="md:text-lg text-base dark:text-slate-200">Log Out</p>
+          <FontAwesomeIcon icon={faArrowRightFromBracket} className={"dark:text-signOut-dark text-signOut-light"} />
+          <p className="md:text-lg text-base text-signOut-light dark:text-signOut-dark">Log Out</p>
         </button>
       </nav>
     </>

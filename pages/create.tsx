@@ -122,7 +122,7 @@ const Create: NextPage = () => {
         <form className="h-full flex flex-col items-center content-center justify-center gap-4">
           <input type={"text"} pattern={"^[0-9]{4}$"} placeholder="Create a new room to chat !" className="room-code" maxLength={4} max={9999}
             min={0o0} value={roomCode} onChange={(event: any) => handleRoomCode(event.target.value)} />
-          <p className="text-red-500 text-center mx-auto pt-4">{error}</p>
+          <p className="text-error-light dark:text-error-dark text-center mx-auto pt-4">{error}</p>
           <button
             onClick={(event: TouchEvent | MouseEvent) => createRoom(event)}
             className="border disabled:bg-blue-500/20 disabled:text-slate-200/40 disabled:border-sky-500/20 disabled:cursor-not-allowed border-sky-500 text-slate-200 bg-blue-500 px-2 py-1 rounded-full"
