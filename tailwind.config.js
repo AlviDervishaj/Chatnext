@@ -26,7 +26,7 @@ module.exports = {
           "dark": "#247ba0"
         },
         "signOut": {
-          "light": "#0aefff",
+          "light": "#00b4d8",
           "dark": "#e2e8f0",
         },
         "error": {
