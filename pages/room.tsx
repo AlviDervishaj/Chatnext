@@ -72,6 +72,7 @@ const Room: NextPage = () => {
         <ChatRoom code={code} />
       </main>
     </>
+
   )
 }
 

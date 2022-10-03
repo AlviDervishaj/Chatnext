@@ -28,7 +28,6 @@ import {
 import { ChatRoomProps } from "./helpers"
 
 export const ChatRoom: FC<ChatRoomProps> = () => {
-  const [code, setCode] = useState<string>("");
   const [messages, setMessages] = useState<Array<DocumentData>>([])
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [status, setStatus] = useState<string>("Waiting for server.")
