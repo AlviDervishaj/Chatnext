@@ -1,9 +1,5 @@
 // Next
-import { NextComponentType } from "next";
-import Image from "next/image";
-
-// Firebase
-import { getAuth, Auth, signOut } from "firebase/auth";
+import { FC } from "react";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,22 +8,19 @@ import { faArrowRightFromBracket, faBars, faCommentSlash } from "@fortawesome/fr
 // Components
 import { ToggleTheme } from "../ToggleTheme";
 import { useEffect, useState } from "react";
+import { NextRouter, useRouter } from "next/router";
 
-export const Navigation: NextComponentType = () => {
-  const auth: Auth = getAuth();
+// Helpers
+import { NavigationProps } from "./NavigationHelpers";
+
+export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
+  const router: NextRouter = useRouter();
   const [code, setCode] = useState<string | null>(null);
-
-  const handleLogOut = async () => {
-    try {
-      localStorage.removeItem("code");
-      await signOut(auth);
-    } catch (error: any) {
-      console.log({ error });
-    }
-  }
 
   const handleLeaveChat = () => {
     localStorage.removeItem("code");
+    // navigate away from chat room
+    router.push("/join");
   }
 
   useEffect(() => {

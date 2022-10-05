@@ -6,7 +6,7 @@ import { useEffect, useState, MouseEvent, TouchEvent } from "react";
 import { useRouter, NextRouter } from "next/router";
 
 // Firebase
-import { getAuth, Auth, User, onAuthStateChanged, Unsubscribe } from "firebase/auth";
+import { getAuth, Auth, User, onAuthStateChanged, Unsubscribe, signOut } from "firebase/auth";
 import {
   collection, CollectionReference, Firestore, getFirestore,
   query, Query, QuerySnapshot, where,
@@ -33,6 +33,15 @@ const Join: NextPage = () => {
     setError(_error);
     setIsLoading(false);
     return;
+  }
+
+  const handleLogOut = async () => {
+    try {
+      localStorage.removeItem("code");
+      await signOut(auth);
+    } catch (error: any) {
+      console.log({ error });
+    }
   }
 
   const handleRoomCode = (_code: string): void => {
@@ -106,7 +115,7 @@ const Join: NextPage = () => {
         />
       </Head>
       <main className="w-full h-full overflow-hidden relative mx-auto px-4">
-        <Navigation />
+        <Navigation handleLogOut={handleLogOut} />
         <form className="h-full flex flex-col items-center content-center justify-center gap-4">
           <input type={"text"} pattern={"^[0-9]{4}$"} placeholder="Join your friends and chat" className="room-code" maxLength={4} max={9999}
             min={0o0} value={roomCode} onChange={(event: any) => handleRoomCode(event.target.value)} />

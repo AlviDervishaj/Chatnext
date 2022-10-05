@@ -5,7 +5,7 @@ import { NextRouter, useRouter } from "next/router";
 import { MouseEvent, TouchEvent, useEffect, useState } from "react";
 
 // Firebase
-import { getAuth, Auth, onAuthStateChanged, User, Unsubscribe } from "firebase/auth";
+import { getAuth, Auth, onAuthStateChanged, User, Unsubscribe, signOut } from "firebase/auth";
 
 // Components
 import { Navigation } from "../components/Navigation";
@@ -51,6 +51,17 @@ const Create: NextPage = () => {
       return setAllowSubmit(true);
     };
   }
+
+  const handleLogOut = async () => {
+    try {
+      localStorage.removeItem("code");
+      await signOut(auth);
+    } catch (error: any) {
+      console.log({ error });
+    }
+  }
+
+
 
   useEffect(() => {
     const unsubscribe: Unsubscribe = onAuthStateChanged(auth, (_user: User | null) => {
@@ -118,7 +129,7 @@ const Create: NextPage = () => {
         />
       </Head>
       <main className="w-full h-full overflow-hidden relative mx-auto px-4">
-        <Navigation />
+        <Navigation handleLogOut={handleLogOut} />
         <form className="h-full flex flex-col items-center content-center justify-center gap-4">
           <input type={"text"} pattern={"^[0-9]{4}$"} placeholder="Create a new room to chat !" className="room-code" maxLength={4} max={9999}
             min={0o0} value={roomCode} onChange={(event: any) => handleRoomCode(event.target.value)} />

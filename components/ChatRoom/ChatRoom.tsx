@@ -8,6 +8,7 @@ import { CreateMessage } from "../CreateMessage"
 import { Loading } from "../Loading"
 import { ChatMessage } from "../ChatMessage"
 
+
 // Firebase
 import {
   getFirestore,
@@ -23,11 +24,13 @@ import {
   DocumentData,
   orderBy,
 } from "firebase/firestore"
+import { getAuth, Auth, signOut } from "firebase/auth";
 
 // Helpers
 import { ChatRoomProps } from "./helpers"
 
 export const ChatRoom: FC<ChatRoomProps> = () => {
+  const auth: Auth = getAuth();
   const [messages, setMessages] = useState<Array<DocumentData>>([])
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [status, setStatus] = useState<string>("Waiting for server.")
@@ -35,6 +38,17 @@ export const ChatRoom: FC<ChatRoomProps> = () => {
 
   const router: NextRouter = useRouter();
   const scrollToMeRef = useRef<HTMLDivElement>(null)
+
+  const handleLogOut = async () => {
+    try {
+      setIsLoading(true);
+      localStorage.removeItem("code");
+      await signOut(auth);
+      setIsLoading(false);
+    } catch (error: any) {
+      console.log({ error });
+    }
+  }
 
   useEffect(() => {
     const _code: string | null = localStorage.getItem("code");
@@ -79,7 +93,7 @@ export const ChatRoom: FC<ChatRoomProps> = () => {
   return (
     <main className={"chat-room"}>
       <div className={"chat-room-background"} />
-      <Navigation />
+      <Navigation handleLogOut={handleLogOut} />
       {isLoading ? (
         <div className={"text-center"}>
           <Loading />
@@ -89,7 +103,7 @@ export const ChatRoom: FC<ChatRoomProps> = () => {
         <>
           <div
             style={{ height: `calc(100vh - ${chatHeight}px)` }}
-            className={`overflow-y-scroll pt-4 fancy-scrollbar w-full px-2 md:px-4`}
+            className={`overflow-y-scroll py-4 fancy-scrollbar w-full px-2 md:px-4`}
           >
             {messages &&
               messages.map((message: any, index: number) => (
