@@ -16,6 +16,8 @@ import { NavigationProps, ShareRoomCodeStruct } from "./NavigationHelpers";
 export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
   const router: NextRouter = useRouter();
   const [code, setCode] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   const handleLeaveChat = () => {
     localStorage.removeItem("code");
@@ -23,18 +25,36 @@ export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
     router.push("/join");
   }
 
+  const displayError = (_error: string) => {
+    setError(_error);
+    setTimeout(() => {
+      setError("")
+    }, 2500)
+  }
+
+  const displayMessage = (_message: string) => {
+    setMessage(_message);
+    setTimeout(() => {
+      setMessage("");
+    }, 2500)
+  }
+
   const handleShareCode = async (): Promise<any> => {
     if (code === null) return;
-    console.log(location.href);
+    if (!navigator) return displayError("Could not find navigator API.")
     // code in localStorage
     const data: ShareRoomCodeStruct = {
-      title: "Follow this link to join my ChatNext group.",
+      title: "Follow this link to join my ChatNext room.",
       url: location.href,
       text: "This is text area.",
     };
-
-    if (navigator && navigator.canShare(data)) {
+    if (navigator.share) {
       await navigator.share(data);
+      return displayMessage("Shared chat room successfully.")
+    }
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(`Follow this link to join my ChatNext room: ${location.href}`);
+      return displayMessage("Link copied successfully. ");
     }
   }
 
@@ -74,6 +94,12 @@ export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
           </span>
         </div>
       </nav>
+      {error && <div className="absolute bottom-20 left-1/2 text-center -translate-x-1/2 rounded-lg bg-red-400 w-11/12 md:w-1/2">
+        <p className="text-slate-100 text-base md:text-lg tracking-wide">{error}</p>
+      </div>}
+      {message && <div className="absolute bottom-20 left-1/2 text-center -translate-x-1/2 rounded-lg bg-green-400 w-11/12 md:w-1/2">
+        <p className="text-slate-900 text-base md:text-lg tracking-wide">{message}</p>
+      </div>}
     </>
   );
 }
