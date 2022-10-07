@@ -3,7 +3,7 @@ import { FC } from "react";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket, faBars, faCommentSlash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket, faBars, faCommentSlash, faShare } from "@fortawesome/free-solid-svg-icons";
 
 // Components
 import { ToggleTheme } from "../ToggleTheme";
@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 
 // Helpers
-import { NavigationProps } from "./NavigationHelpers";
+import { NavigationProps, ShareRoomCodeStruct } from "./NavigationHelpers";
 
 export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
   const router: NextRouter = useRouter();
@@ -21,6 +21,21 @@ export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
     localStorage.removeItem("code");
     // navigate away from chat room
     router.push("/join");
+  }
+
+  const handleShareCode = async (): Promise<any> => {
+    if (code === null) return;
+    console.log(location.href);
+    // code in localStorage
+    const data: ShareRoomCodeStruct = {
+      title: "Follow this link to join my ChatNext group.",
+      url: location.href,
+      text: "This is text area.",
+    };
+
+    if (navigator && navigator.canShare(data)) {
+      await navigator.share(data);
+    }
   }
 
   useEffect(() => {
@@ -37,16 +52,25 @@ export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
             <FontAwesomeIcon icon={faBars} size={"1x"} className={"dark:text-signOut-dark text-signOut-light"} />
           </button>
           <span className={"dropdown-parent"}>
-            <button className="w-full flex flex-row md:gap-2 justify-center items-center content-center dropdown-child" onClick={() => handleLogOut()}>
+            <button className="navigation-quick-link" onClick={() => handleLogOut()}>
               <FontAwesomeIcon icon={faArrowRightFromBracket} className={"dark:text-signOut-dark text-signOut-light"} />
               <p className="md:text-lg text-base text-signOut-light dark:text-signOut-dark">Log Out</p>
             </button>
-            {code && <button
-              className="w-full flex flex-row md:gap-2 justify-center items-center content-center dropdown-child"
-              onClick={() => handleLeaveChat()}>
-              <FontAwesomeIcon icon={faCommentSlash} className={"dark:text-signOut-dark text-signOut-light"} />
-              <p className="md:text-lg text-base text-signOut-light dark:text-signOut-dark">Leave Chat</p>
-            </button>}
+            {code && <>
+              <button
+                className="navigation-quick-link"
+                onClick={() => handleLeaveChat()}>
+                <FontAwesomeIcon icon={faCommentSlash} className={"dark:text-signOut-dark text-signOut-light"} />
+                <p className="md:text-lg text-base text-signOut-light dark:text-signOut-dark">Leave Chat</p>
+              </button>
+              <button
+                className="navigation-quick-link"
+                onClick={() => handleShareCode()}>
+                <FontAwesomeIcon icon={faShare} className={"dark:text-signOut-dark text-signOut-light"} />
+                <p className="md:text-lg text-base text-signOut-light dark:text-signOut-dark">Invite via link</p>
+              </button>
+
+            </>}
           </span>
         </div>
       </nav>

@@ -1,7 +1,6 @@
 // Next & Router
 import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
-import Head from "next/head";
 import { useEffect, useState } from "react";
 
 // Firebase
@@ -33,41 +32,6 @@ const Room: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <meta name="viewport" content="width=device-width" />
-        <meta charSet="utf-8" />
-        <title>Chatnext</title>
-        <meta name="title" content="Chatnext" />
-        <link rel="icon" href="https://portfolio-alvi.vercel.app/static/images/high.png" />
-        <meta
-          name="description"
-          content="Chatnext a simple and reliable communication tool."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://chatnext.vercel.app/" />
-        <meta property="og:title" content="Chatnext" />
-        <meta
-          property="og:description"
-          content="Chatnext a simple and reliable communication tool."
-        />
-        <meta
-          property="og:image"
-          content="https://portfolio-alvi.vercel.app/static/images/high.png"
-        />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://chatnext.vercel.app/" />
-        <meta property="twitter:creator" content="@alvi_d1" />
-        <meta property="twitter:title" content="Chatnext" />
-        <meta
-          property="twitter:description"
-          content="Chatnext a simple and reliable communication tool."
-        />
-        <meta
-          property="twitter:image"
-          content="https://portfolio-alvi.vercel.app/static/images/high.png"
-        />
-      </Head>
-
       <main className="w-full h-full overflow-hidden relative mx-auto px-1 md:px-4">
         <ChatRoom code={code} />
       </main>

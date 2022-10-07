@@ -18,8 +18,8 @@ module.exports = {
           }
         },
         "toggleTheme": {
-          "light": "#03c4fd",
-           "dark": "#7dd3fc", 
+          "light": "#00a6fb",
+           "dark": "#5aa9e6", 
         },
         "authButton": {
           "light": "#3da5d9",
