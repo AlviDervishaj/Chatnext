@@ -53,7 +53,7 @@ const Share: NextComponentType = () => {
     }
     checkCodeAndUser();
 
-  }, [router.query]);
+  }, [auth, router]);
 
   return (
     <>
