@@ -87,15 +87,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://chatnext.vercel.app/" />
       <meta property="og:title" content="Chatnext" />
-      <meta property="og:description" content="Chatnext a simple and reliable communication tool." />
-      <meta property="og:image" content="https://portfolio-alvi.vercel.app/static/images/high.png" />
+      <meta property="og:description" content="Chatnext, a simple and reliable communication tool." />
+      <meta property="og:image" content="/static/icons/chatnext-logo.webp" />
 
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="https://chatnext.vercel.app/" />
       <meta property="twitter:creator" content="@alvi_d1" />
       <meta property="twitter:title" content="Chatnext" />
-      <meta property="twitter:description" content="Chatnext a simple and reliable communication tool." />
-      <meta property="twitter:image" content="https://portfolio-alvi.vercel.app/static/images/high.png" />
+      <meta property="twitter:description" content="Chatnext, a simple and reliable communication tool." />
+      <meta property="twitter:image" content="/static/icons/chatnext-logo.webp" />
 
       <meta name="mobile-web-app-capable" content="yes" />
 
@@ -103,7 +103,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <meta name="theme-color" content="#0f172a" />
       <meta charSet="utf-8" />
       <meta name="title" content="Chatnext" />
-      <meta name="description" content="Chatnext a simple and reliable communication tool." />
+      <meta name="description" content="Chatnext, a simple and reliable communication tool." />
 
       <meta name="msapplication-TileColor" content="#3a506b" />
       <meta name="msapplication-tap-highlight" content="no" />
@@ -111,7 +111,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <title>Chatnext</title>
 
       <link rel="manifest" href="/static/icons/manifest.json" />
-      <link rel="icon" href="https://portfolio-alvi.vercel.app/static/images/high.png" />
+      <link rel="icon" href="/static/icons/chatnext-logo.webp" />
     </Head>
     <Component {...pageProps} />
   </>

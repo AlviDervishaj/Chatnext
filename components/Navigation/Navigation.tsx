@@ -44,9 +44,9 @@ export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
     if (!navigator) return displayError("Could not find navigator API.")
     // code in localStorage
     const data: ShareRoomCodeStruct = {
-      title: "Follow this link to join my ChatNext room.",
+      title: "Chatnext Share Room",
       url: `${window.location.origin}/share/${code}`,
-      text: "This is text area.",
+      text: "Follow this link to join my ChatNext room.\n",
     };
     if (navigator.share) {
       await navigator.share(data);
