@@ -61,8 +61,7 @@ const Join: NextPage = () => {
     event.preventDefault();
     setIsLoading(true);
     const response: ReturnType = await checkIfRoomExists(roomCode);
-
-    if (response.code === 200 || response.error === "Room Exists") return displayError("Room does not exists !");
+    if (response.code === 200 || response.info === "Room does not exist.") return displayError("Room does not exist.");
     setError("");
     // join room
     setIsLoading(false);
