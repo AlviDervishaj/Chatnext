@@ -45,7 +45,7 @@ export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
     // code in localStorage
     const data: ShareRoomCodeStruct = {
       title: "Follow this link to join my ChatNext room.",
-      url: location.href,
+      url: `${window.location.origin}/share/${code}`,
       text: "This is text area.",
     };
     if (navigator.share) {
@@ -53,7 +53,7 @@ export const Navigation: FC<NavigationProps> = ({ handleLogOut }) => {
       return displayMessage("Shared chat room successfully.")
     }
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(`Follow this link to join my ChatNext room: ${location.href}`);
+      navigator.clipboard.writeText(`${window.location.origin}/share/${code}`);
       return displayMessage("Link copied successfully. ");
     }
   }

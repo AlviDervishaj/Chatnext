@@ -15,6 +15,8 @@ import {
 // Components
 import { Navigation } from "../components/Navigation";
 import { Loading } from "../components/Loading";
+import { ReturnType } from "../firebase-helpers/helpers";
+import { checkIfRoomExists } from "../firebase-helpers";
 
 const Join: NextPage = () => {
   const [user, setUser] = useState<User>();
@@ -58,10 +60,9 @@ const Join: NextPage = () => {
   const joinRoom = async (event: TouchEvent | MouseEvent) => {
     event.preventDefault();
     setIsLoading(true);
+    const response: ReturnType = await checkIfRoomExists(roomCode);
 
-    const q: Query = query(coll, where('code', '==', roomCode));
-    const room: QuerySnapshot = await getDocs(q);
-    if (room.empty) return displayError("Room does not exists !");
+    if (response.code === 200 || response.error === "Room Exists") return displayError("Room does not exists !");
     setError("");
     // join room
     setIsLoading(false);

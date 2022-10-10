@@ -20,6 +20,8 @@ import {
 // Helpers
 import { getCurrentDate, getReadableTime } from "../global_helpers";
 import Link from "next/link";
+import { checkIfRoomExists } from "../firebase-helpers";
+import { ReturnType } from "../firebase-helpers/helpers";
 
 const Create: NextPage = () => {
   const [user, setUser] = useState<User>();
@@ -73,10 +75,9 @@ const Create: NextPage = () => {
   const createRoom = async (event: TouchEvent | MouseEvent) => {
     event.preventDefault();
     setIsLoading(true);
+    const response: ReturnType = await checkIfRoomExists(roomCode);
 
-    const q: Query = query(coll, where('code', '==', roomCode));
-    const room: QuerySnapshot = await getDocs(q);
-    if (!room.empty) return displayError("Room already exists !");
+    if (response.error && response.code === 400) return displayError("Room already exists !");
     setError("");
     // create room collection
     const roomRef: DocumentReference = await addDoc(coll, {
